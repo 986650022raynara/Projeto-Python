@@ -1,7 +1,7 @@
 import pandas as pd
 import streamlit as st
 import pandas as pd
-import plotly
+import matplotlib as pt
 
 df = pd.read_csv('prices.csv')
 
@@ -32,5 +32,7 @@ st.plotly_chart(df[df['symbol'] == stock].plot.line(x='date', y='adjusted'))
 
 # Show the table of data
 st.table(df)
+pt.ploty(x,y)
+st.pyplot()
 
 
