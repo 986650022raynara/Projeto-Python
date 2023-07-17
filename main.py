@@ -1,34 +1,38 @@
 import pandas as pd
-import yfinance as yf
-import matplotlib.pyplot as plt
+import streamlit as st
+import pandas as pd
+import matplotlib as pt
 
-acoes = ["TOTS3.SA","ASAI3.SA","VALE3.SA","PETR4.SA","PETR3.SA"]
+df = pd.read_csv('prices.csv')
 
-def obter_cotacoes(acoes):
-    dados = yf.download(acoes, start="2021-01-01", end="2021-12-31")
-    return dados
+st.plotly_chart(df.plot.line(x='date', y='adjusted'))
 
-def plotar_tendencia(dados):
-    dados["Adj Close"].plot()
-    plt.xlabel("Data")
-    plt.ylabel("Cotação")
-    plt.title("Tendência da Ação")
-    plt.show()
 
-def plotar_todas_tendencias(dados):
-    dados["Adj Close"].plot(legend=True)
-    plt.xlabel("Data")
-    plt.ylabel("Cotação")
-    plt.title("Todas as Tendências")
-    plt.show()
+df = pd.DataFrame({
+    'date': pd.to_datetime(['2023-01-01', '2023-01-02', '2023-01-03', '2010-01-11', '2011-02-18', '2012-03-12', '2013-03-12', '2014-03-14', '2015-03-20', '2021-06-17']),
+    'adjusted': [100, 101, 102, 50, 47, 39, 48, 75, 12, 35]
+})
 
-def mostrar_cotacoes(dados):
-    cotacoes = dados[["Date", "Adj Close"]]
-    cotacoes = cotacoes.sort_values("Date", ascending=False)
-    print(cotacoes)
+df.to_csv('prices.csv')
 
-dados = obter_cotacoes(acoes)
-plotar_tendencia(dados)
-plotar_todas_tendencias(dados)
-mostrar_cotacoes(dados)
+# Load the CSV file
+df = pd.read_csv('prices.csv')
+
+# Select the `date` and `adjusted` columns
+df = df[['date', 'adjusted']]
+
+# Plot the data
+st.plotly_chart(df.plot.line(x='date', y='adjusted'))
+
+# Select a stock
+stock = st.selectbox('Select a stock:', df['symbol'].unique())
+
+# Plot the data for the selected stock
+st.plotly_chart(df[df['symbol'] == stock].plot.line(x='date', y='adjusted'))
+
+# Show the table of data
+st.table(df)
+pt.ploty(x,y)
+st.pyplot()
+
 
