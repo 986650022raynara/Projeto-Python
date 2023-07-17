@@ -32,7 +32,7 @@ st.plotly_chart(df[df['symbol'] == stock].plot.line(x='date', y='adjusted'))
 
 # Show the table of data
 st.table(df)
-pt.ploty(x,y)
-st.pyplot()
+fig = pt.figure()
+st.pyplot(fig)
 
 
