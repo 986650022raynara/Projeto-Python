@@ -1,5 +1,6 @@
 import pandas as pd
 import streamlit as st
+import plotly
 
 df = pd.DataFrame({
     'date': pd.to_datetime(['2023-01-01', '2023-01-02', '2023-01-03', '2010-01-11', '2011-02-18', '2012-03-12', '2013-03-12', '2014-03-14', '2015-03-20', '2021-06-17']),
